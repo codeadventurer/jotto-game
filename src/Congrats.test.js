@@ -3,16 +3,15 @@ import Enzyme, { shallow } from "enzyme";
 import EnzymeAdapter from "enzyme-adapter-react-16";
 
 import Congrats from "./Congrats";
-// import { findByTestAttr } from "../test/testUtils";
+import { findByTestAttr } from "../test/testUtils";
 
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 
-const setup = (props = {}) => {
-  return shallow(<Congrats {...props} />);
-};
+const defaultProps = { success: false };
 
-export const findByTestAttr = (wrapper, val) => {
-  return wrapper.find(`[data-test="${val}"]`);
+const setup = (props = {}) => {
+  const setupProps = { ...defaultProps, ...props };
+  return shallow(<Congrats {...setupProps} />);
 };
 
 test("renders Congrats without error", () => {
